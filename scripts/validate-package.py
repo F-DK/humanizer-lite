@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILL = (ROOT / "SKILL.md").read_text()
+PATTERNS = (ROOT / "references" / "patterns.md").read_text()
 README = (ROOT / "README.md").read_text()
 PLUGIN = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
 
@@ -44,10 +45,14 @@ if len(versions) != 1:
 
 pattern_numbers = [
     int(number)
-    for number in re.findall(r"(?m)^### ([0-9]+)\. ", SKILL)
+    for number in re.findall(r"(?m)^### ([0-9]+)\. ", PATTERNS)
 ]
 if pattern_numbers != list(range(1, 34)):
-    raise SystemExit(f"Expected patterns 1-33, found {pattern_numbers}")
+    raise SystemExit(f"Expected patterns 1-33 in references/patterns.md, found {pattern_numbers}")
+
+for reference in ("references/patterns.md", "references/false-positives.md"):
+    if reference not in SKILL:
+        raise SystemExit(f"SKILL.md must link {reference}")
 
 readme_numbers = {
     int(number) for number in re.findall(r"(?m)^\| ([0-9]+) \|", README)

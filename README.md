@@ -47,7 +47,7 @@ The skill is then invoked as `/humanizer:humanizer`.
 
 ### Manual
 
-Any agent harness can use the skill directly because the runtime artifact is `SKILL.md`. Install it wherever your harness expects skill directories, or copy `SKILL.md` into an existing skill folder.
+Any agent harness can use the skill directly because the runtime artifacts are plain Markdown: `SKILL.md` plus the `references/` folder it loads on demand. Install them wherever your harness expects skill directories.
 
 For example:
 
@@ -59,7 +59,7 @@ Or, if you already have this repo cloned:
 
 ```bash
 mkdir -p /path/to/your/skills/humanizer
-cp SKILL.md /path/to/your/skills/humanizer/
+cp -R SKILL.md references /path/to/your/skills/humanizer/
 ```
 
 ## Usage
@@ -102,7 +102,9 @@ The skill will analyze your sentence rhythm, word choices, and quirks, then appl
 
 Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
 
-The skill also includes a final "obviously AI generated" audit pass and a second rewrite, to catch lingering AI-isms in the first draft.
+`SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 33 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
+
+The skill also runs a self-audit before delivering, to catch lingering AI-isms and any fact the rewrite invented.
 
 Rewrites follow a no-fabrication rule: they never add facts, names, dates, or citations that aren't in the source text. Specificity has to come from the source or the author, not from the rewrite.
 
@@ -207,6 +209,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 
 ## Version History
 
+- **4.0.0** - Split the skill into a short `SKILL.md` and two on-demand references (`references/patterns.md`, `references/false-positives.md`), cutting what a session loads up front by roughly 80% while keeping the full catalogue available. The prompt now states the three non-derivable rules (no fabrication, sterility is also a tell, no em/en dashes) and leaves the rest to judgement, with the pattern lists framed as evidence rather than a banlist. No change to the 33 patterns.
 - **2.9.1** - Improved distribution and portability: removed nonportable frontmatter and tool preapprovals, made global installation the documented default, added package validation, and removed the duplicated long-form example from the runtime prompt. No change to the 33 patterns.
 - **2.9.0** - Added a no-fabrication rule: rewrites may not invent facts, names, dates, or citations not present in the source, and every example that modeled invented specifics was re-cut to use only source information (fixes #187). Replaced paragraph-count parity with an information-over-shape rule, made a user's voice sample outrank the em dash ban, and added invocation modes (pasted text / file / embedded). No change to the 33 patterns.
 - **2.8.3** - Moved the skill version from the unsupported top-level frontmatter key to `metadata.version` for Agent Skills and Claude compatibility. No change to the 33 patterns.

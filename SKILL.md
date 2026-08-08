@@ -1,105 +1,57 @@
 ---
 name: humanizer
 description: |
-  Remove signs of AI-generated writing from text. Use when editing or reviewing
-  text to make it sound more natural and human-written. Based on Wikipedia's
-  "Signs of AI writing". Detects and fixes inflated significance, promotional
-  language, -ing pseudo-analysis, vague attribution, em dash overuse, rule of
-  three, AI vocabulary, negative parallelism, hedging, and filler.
+  Remove signs of AI-generated writing from text. Use when editing, reviewing, or
+  drafting prose that should not read as machine-written: essays, blog posts, docs,
+  PR descriptions, commit messages, encyclopedic entries. Covers inflated
+  significance, promotional tone, -ing pseudo-analysis, vague attribution, em dash
+  overuse, rule of three, AI vocabulary, negative parallelism, hedging, and filler.
 license: MIT
 metadata:
-  version: "3.0.0-lite"
+  version: "4.0.0"
 ---
 
 # Humanizer
 
-Edit text so it reads as human writing. Rewrite the tells listed below.
+Rewrite text so a reader has no reason to suspect a machine wrote it.
 
-## Rules
+You already recognize most of this; the reference files hold the part you cannot derive, which is Wikipedia's catalogue of what actually correlates with AI text in the wild. Use your judgement on everything else.
 
-1. **Keep every claim.** Compress the dull parts, dwell where a human would, merge or split paragraphs freely. When information and original structure conflict, information wins.
-2. **Invent nothing.** No fact, name, number, date, quote, or citation may enter the rewrite unless it is in the source or from the user. Cut an unsupported claim; do not decorate it. A fabrication is a defect even when it sounds more human. (Fiction is exempt.)
-3. **Match the register:** formal, casual, or technical. If the user supplies a writing sample, copy its habits: sentence length, vocabulary, paragraph openings, punctuation, recurring quirks. The sample overrides every style rule here, including the em dash ban.
-4. **Voice, not sterility.** Voiceless prose is also an AI tell. In essays, blogs, and personal writing, allow opinion, doubt, humor, asides, uneven rhythm. In encyclopedic, technical, legal, or reference text, plain and neutral *is* the human voice; add no opinions there.
-5. **Hard constraint:** the final text contains no em dash (—) and no en dash (–), including spaced ` — ` and double hyphens ` -- `. Replace with a period, comma, colon, parentheses, or a restructure. Scan for both characters before delivery.
+## What this skill is opinionated about
 
-## The transform
+Three positions worth holding even when your instincts pull elsewhere:
 
-Before:
-> Nestled in the breathtaking Gonder region, Alamata Raya Kobo stands as a vibrant town with a rich cultural heritage, symbolizing the enduring spirit of its people. Despite its challenges, the town continues to thrive.
+**Fabrication is worse than blandness.** No fact, name, number, date, quote, or citation may appear in the rewrite unless the source or the user supplied it. A vague sentence gets cut, not upgraded into a specific-sounding one. Where a rewrite needs real-world detail to work, ask for it or write the plain version. Fiction is the exception.
 
-After:
-> Alamata Raya Kobo is a town in the Gonder region of Ethiopia.
+**Sterility is also a tell.** Scrubbed, voiceless, evenly-paced prose reads as machine output just as clearly as *vibrant tapestry* does. In essays, blogs, and personal writing, let the author have opinions, doubt, humor, asides, and uneven rhythm. In encyclopedic, technical, legal, and reference text, plain and neutral *is* the human register, so add nothing there.
 
-Cut the puffery, keep the fact, use "is". Missing specifics come from the source or the user, never from the rewrite.
+**No em dashes or en dashes in the final text.** This one is mechanical, not a judgement call: no `—`, no `–`, no spaced version of either, no ` -- `. Replace with a period, comma, colon, parentheses, or a restructure. Scan the finished text for both characters before you hand it over. A user-supplied writing sample that uses them overrides this rule.
 
-## Tells
+## Judgement, not search-and-replace
 
-**Inflated significance.** stands/serves as, is a testament/reminder, plays a vital/crucial/pivotal/key role, underscores/highlights the importance of, reflects broader, symbolizing its enduring, contributing to, setting the stage for, marks a shift, turning point, evolving landscape, focal point, indelible mark, deeply rooted.
+The reference lists are evidence, not a banlist. A clean human writer hits several of these patterns with no AI involvement, so weigh clusters rather than single hits, and leave the prose alone when the tells do not cluster. Returning text unchanged with a one-line explanation is a valid result.
 
-**Promotional tone.** boasts, vibrant, rich (figurative), profound, showcasing, exemplifies, commitment to, nestled, in the heart of, groundbreaking, renowned, breathtaking, stunning, must-visit, natural beauty.
+Never rewrite a watched phrase inside a quotation, a title, a proper name, or an example that discusses the phrase.
 
-**AI vocabulary.** delve, crucial, key (adj), pivotal, tapestry, landscape (abstract), interplay, intricate, foster, garner, enhance, align with, underscore, highlight (verb), showcase, testament, enduring, valuable, additionally, moreover.
+Keep every claim from the source. Depth need not be uniform: compress the dull stretches, dwell where a person would, merge or split paragraphs freely. When fidelity to the information and fidelity to the original shape conflict, the information wins.
 
-**Pseudo-analysis.** Participle tails bolted onto a finished sentence: highlighting..., ensuring..., reflecting..., contributing to..., fostering..., encompassing..., showcasing.... Delete, or turn into a real clause.
+## Voice
 
-**Vague authority.** Experts argue, Observers have cited, Industry reports, Some critics say, several sources. Name the source or cut the claim.
+If the user supplies a writing sample, read it before rewriting and match its habits: sentence lengths, vocabulary level, paragraph openings, punctuation, recurring phrases. Do not upgrade casual words or regularize deliberate quirks. The sample outranks every style rule in this skill, including the dash ban.
 
-**Notability padding.** Lists of outlets, "independent coverage", follower counts. Keep one item that carries real context; drop the rest.
+Without a sample, match the register the text is already in.
 
-**Copula avoidance.** serves as, stands as, represents, marks, features, boasts, offers → is, are, has.
+## References
 
-**Negative parallelism.** "Not only X but Y", "It's not just X, it's Y", and clipped tails such as "no guessing", "no wasted motion".
+- `references/patterns.md`: the 33 patterns with watchlists and before/after pairs. Consult the entries relevant to the text in front of you. Worth a full pass when the text is long, heavily AI-flavored, or when you want to name what you changed.
+- `references/false-positives.md`: what looks like AI but is not, and the signals of genuine human writing that over-editing destroys. Read this before editing anything that might already be human-written.
 
-**Rule of three.** Forced triplets of nouns, adjectives, or clauses. Break the pattern.
+## Output
 
-**False ranges.** "from X to Y" where X and Y sit on no shared scale.
+- **Pasted text (default):** the final rewrite, plus a few bullets on what you changed and why. Do the drafting and self-audit in your thinking; the user wants the result, not the loop.
+- **File:** rewrite in place so the file holds only the final text. Prose only, so leave code blocks, frontmatter, data, and link targets untouched. Report a short summary in the conversation.
+- **Embedded (another agent or task calls this as one step):** the final text only. No preamble, no audit, no summary.
 
-**Elegant variation.** Synonym cycling for one referent (protagonist / main character / central figure / hero).
+Before delivering, answer two questions for yourself: what still reads as AI, and does the text state any fact that was not in the source? Fix both. Report the second one if the answer is ever yes.
 
-**Passive and subjectless fragments.** "No configuration needed", "The results are preserved automatically". Name the actor.
-
-**Formulaic sections.** "Challenges and Future Prospects", "Despite these challenges", upbeat send-offs ("The future looks bright", "a step in the right direction"). Cut, and end on the last concrete fact.
-
-**Chat residue.** I hope this helps, Certainly!, Of course!, You're absolutely right, Great question, Would you like me to..., let me know, here is a...
-
-**Cutoff and gap-fill.** as of [date], while specific details are limited, based on available information, not publicly available, maintains a low profile, keeps personal details private, likely grew up, it is believed that. State what is unknown, or cut the sentence.
-
-**Persuasive authority.** The real question is, at its core, in reality, what really matters, fundamentally, the deeper issue, the heart of the matter.
-
-**Signposting.** Let's dive in, let's explore, let's break this down, here's what you need to know, now let's look at, without further ado.
-
-**Aphorism formulas.** "X is the language of Y", "X becomes a trap", "the currency/architecture of". State the plain claim instead.
-
-**Fake-candid openers.** Honestly?, Look, Here's the thing, The thing is, Let's be honest, used as standalone hooks before an ordinary point.
-
-**Manufactured drama.** Runs of short declarative fragments engineered so each one lands like a closer.
-
-**Fragmented headers.** A heading, then a one-line paragraph that restates the heading.
-
-**Diff-anchored prose.** Text that narrates a change instead of describing the thing as it is. Exception: changelogs, release notes, migration guides.
-
-**Filler and hedging.** in order to → to; due to the fact that → because; at this point in time → now; in the event that → if; has the ability to → can; it is important to note that → (cut). Collapse stacked hedges ("could potentially possibly be argued").
-
-**Formatting tells.** Mechanical boldface. Bulleted lists of "**Header:** restated sentence". Title Case Headings. Emoji. Curly quotes. Uniform hyphenation: keep the hyphen before a noun ("a high-quality report"), drop it after ("the report is high quality").
-
-## Do not over-edit
-
-Not tells on their own: polish, formal vocabulary, one *however*, one em dash, one short emphatic sentence, curly quotes, mixed register, dry prose, unsourced claims, clean formatting, salutations. Act on clusters, not single hits. Never rewrite a watched phrase inside a quotation, title, proper name, or an example that discusses the phrase.
-
-Preserve human signals: odd hard-to-fabricate detail, mixed feelings, dated references, self-corrections and parentheticals, uneven sentence length, defensible word choices.
-
-## Modes
-
-- **Pasted text (default):** deliver the draft, the audit bullets, and the final rewrite.
-- **File:** rewrite the file in place so it holds the final text only. Leave code, frontmatter, data, and link targets untouched. Report a short summary instead of the full text.
-- **Embedded (another agent calls this skill):** output the final text only. No draft, no audit, no summary.
-
-## Process
-
-1. Mark every tell.
-2. Draft the rewrite. Check that it reads well aloud, varies sentence length, and prefers is/are/has.
-3. Audit with two questions: what still reads as AI, and does the draft state any fact not in the source? One line each.
-4. Fix both, scan for — and –, then deliver.
-
-Source: Wikipedia:Signs of AI writing (WikiProject AI Cleanup).
+Source: [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), WikiProject AI Cleanup.

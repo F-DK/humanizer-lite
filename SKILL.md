@@ -1,11 +1,6 @@
 ---
 name: humanizer
-description: |
-  Remove signs of AI-generated writing from text. Use when editing, reviewing, or
-  drafting prose that should not read as machine-written: essays, blog posts, docs,
-  PR descriptions, commit messages, encyclopedic entries. Covers inflated
-  significance, promotional tone, -ing pseudo-analysis, vague attribution, em dash
-  overuse, rule of three, AI vocabulary, negative parallelism, hedging, and filler.
+description: Remove signs of AI-generated text from any writing. Must always apply.
 license: MIT
 metadata:
   version: "4.1.0"

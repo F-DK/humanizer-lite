@@ -9,10 +9,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL = (ROOT / "SKILL.md").read_text()
-PATTERNS = (ROOT / "references" / "patterns.md").read_text()
-README = (ROOT / "README.md").read_text()
-PLUGIN = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
+SKILL = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+PATTERNS = (ROOT / "references" / "patterns.md").read_text(encoding="utf-8")
+README = (ROOT / "README.md").read_text(encoding="utf-8")
+PLUGIN = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
 
 
 def require(match: re.Match[str] | None, message: str) -> re.Match[str]:
@@ -47,8 +47,8 @@ pattern_numbers = [
     int(number)
     for number in re.findall(r"(?m)^### ([0-9]+)\. ", PATTERNS)
 ]
-if pattern_numbers != list(range(1, 34)):
-    raise SystemExit(f"Expected patterns 1-33 in references/patterns.md, found {pattern_numbers}")
+if pattern_numbers != list(range(1, 36)):
+    raise SystemExit(f"Expected patterns 1-35 in references/patterns.md, found {pattern_numbers}")
 
 for reference in ("references/patterns.md", "references/false-positives.md"):
     if reference not in SKILL:
@@ -57,8 +57,8 @@ for reference in ("references/patterns.md", "references/false-positives.md"):
 readme_numbers = {
     int(number) for number in re.findall(r"(?m)^\| ([0-9]+) \|", README)
 }
-if readme_numbers != set(range(1, 34)):
-    raise SystemExit("README pattern table must contain patterns 1-33")
+if readme_numbers != set(range(1, 36)):
+    raise SystemExit("README pattern table must contain patterns 1-35")
 
 if len(SKILL.splitlines()) > 500:
     raise SystemExit("SKILL.md exceeds the 500-line portability budget")

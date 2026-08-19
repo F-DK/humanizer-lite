@@ -2,7 +2,7 @@
 
 A portable agent skill that removes signs of AI-generated writing from text. It is plain Markdown, so it runs in any harness that supports skill-style instructions.
 
-This is a fork of [blader/humanizer](https://github.com/blader/humanizer) that splits the skill in two: a short `SKILL.md` the agent always loads, and a `references/` folder it opens only when the text calls for it. Same 35 patterns, same Wikipedia source, a much smaller prompt per invocation.
+This is a fork of [blader/humanizer](https://github.com/blader/humanizer) that splits the skill in two: a short `SKILL.md` the agent always loads, and a `references/` folder it opens only when the text calls for it. Same patterns, same Wikipedia source, a much smaller prompt per invocation.
 
 It installs under the skill name `humanizer`, the same name upstream uses. Remove any existing humanizer install first, or you will have two copies competing.
 
@@ -116,7 +116,7 @@ The skill will analyze your sentence rhythm, word choices, and quirks, then appl
 
 Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), maintained by WikiProject AI Cleanup. The guide is compiled from cleanup work on AI-generated text across Wikipedia.
 
-`SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 35 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
+`SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 36 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
 
 The skill also runs a self-audit before delivering, to catch lingering AI-isms and any fact the rewrite invented.
 
@@ -126,7 +126,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 
 > "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
 
-## The 35 patterns
+## The 36 patterns
 
 Grouped as in [`references/patterns.md`](references/patterns.md), where each entry has its full watchlist.
 
@@ -194,6 +194,7 @@ Grouped as in [`references/patterns.md`](references/patterns.md), where each ent
 | 33 | **Conversational rhetorical openers** | "Honestly? It depends..." | Remove the fake-candid setup |
 | 34 | **Shadowboxing** | "I'm not saying documentation doesn't matter..." | Cut the defense; state the real claim |
 | 35 | **Rejecting fake alternatives** | "A tempting approach would be... but" | Cut the option nobody would pick |
+| 36 | **Hinge colons** | "If you're coming from X: instead of Y, you Z" | Drop the setup; state the point |
 
 ## Full example
 
@@ -232,6 +233,7 @@ Grouped as in [`references/patterns.md`](references/patterns.md), where each ent
 
 ## Version history
 
+- **4.2.0** - Reviewed Cursor's [unslop](https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md) skill and folded in what it had that this one lacked, without growing the list where an existing entry could carry it. Added pattern #36 (colons used as mid-sentence hinges). Extended #7 with technical-sounding abstractions (substrate, wedge, vector, flywheel) and plain-word swaps (utilize, leverage, facilitate); extended #4 to feature-marketing prose in technical writing, with a portability test for sentences that would fit any project's docs; added a false-positive carve-out to #16 so legitimate bold lead-ins survive; noted in #14 that replacing every dash with parentheses swaps one tic for another. 36 patterns total.
 - **4.1.0** - Synced with upstream v2.11.2: added patterns #34 (shadowboxing, defending against objections the text never raised) and #35 (rejecting fake alternatives, editorial scar tissue left in the final draft), extended #11 to repeated sentence openings, broadened #28 to casual announcements, added `quietly` and figurative `gate/gated/gating` to the #7 vocabulary list, and added the matching false-positive guards for real disclaimers, real alternatives, and deliberate repetition. Packaging: `plugin.json` now declares `"skills": ["./"]` so Claude Desktop discovers the plugin, and the validator reads files as UTF-8 so it works on Windows locales. 35 patterns total.
 - **4.0.0** - Split the skill into a short `SKILL.md` and two on-demand references (`references/patterns.md`, `references/false-positives.md`), cutting the prompt an invocation loads from 412 lines (29.6 KB) to 57 lines (4.4 KB) while keeping the full catalogue available on demand. The prompt now states the three non-derivable rules (no fabrication, sterility is also a tell, no em/en dashes) and leaves the rest to judgement, with the pattern lists framed as evidence rather than a banlist. Forked from upstream 2.9.1; no change to the 33 patterns.
 

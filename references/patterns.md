@@ -2,7 +2,7 @@
 
 Full watchlists with before/after pairs. Read the entries you need; the index below is the map.
 
-1. Undue Emphasis on Significance, Legacy, and Broader Trends | 2. Undue Emphasis on Notability and Media Coverage | 3. Superficial Analyses with -ing Endings | 4. Promotional and Advertisement-like Language | 5. Vague Attributions and Weasel Words | 6. Outline-like "Challenges and Future Prospects" Sections | 7. Overused "AI Vocabulary" Words | 8. Avoidance of "is"/"are" (Copula Avoidance) | 9. Negative Parallelisms and Tailing Negations | 10. Rule of Three Overuse | 11. Elegant Variation and Repeated Sentence Openings | 12. False Ranges | 13. Passive Voice and Subjectless Fragments | 14. Em Dashes (and En Dashes): Cut Them | 15. Overuse of Boldface | 16. Inline-Header Vertical Lists | 17. Title Case in Headings | 18. Emojis | 19. Curly Quotation Marks | 20. Collaborative Communication Artifacts | 21. Knowledge-Cutoff Disclaimers and Speculative Gap-Filling | 22. Sycophantic/Servile Tone | 23. Filler Phrases | 24. Excessive Hedging | 25. Generic Positive Conclusions | 26. Hyphenated Word Pair Overuse | 27. Persuasive Authority Tropes | 28. Signposting and Announcements | 29. Fragmented Headers | 30. Diff-Anchored Writing | 31. Manufactured Punchlines and Staccato Drama | 32. Aphorism Formulas | 33. Conversational Rhetorical Openers | 34. Shadowboxing (Answering Objections No One Raised) | 35. Rejecting Fake Alternatives
+1. Undue Emphasis on Significance, Legacy, and Broader Trends | 2. Undue Emphasis on Notability and Media Coverage | 3. Superficial Analyses with -ing Endings | 4. Promotional and Advertisement-like Language | 5. Vague Attributions and Weasel Words | 6. Outline-like "Challenges and Future Prospects" Sections | 7. Overused "AI Vocabulary" Words | 8. Avoidance of "is"/"are" (Copula Avoidance) | 9. Negative Parallelisms and Tailing Negations | 10. Rule of Three Overuse | 11. Elegant Variation and Repeated Sentence Openings | 12. False Ranges | 13. Passive Voice and Subjectless Fragments | 14. Em Dashes (and En Dashes): Cut Them | 15. Overuse of Boldface | 16. Inline-Header Vertical Lists | 17. Title Case in Headings | 18. Emojis | 19. Curly Quotation Marks | 20. Collaborative Communication Artifacts | 21. Knowledge-Cutoff Disclaimers and Speculative Gap-Filling | 22. Sycophantic/Servile Tone | 23. Filler Phrases | 24. Excessive Hedging | 25. Generic Positive Conclusions | 26. Hyphenated Word Pair Overuse | 27. Persuasive Authority Tropes | 28. Signposting and Announcements | 29. Fragmented Headers | 30. Diff-Anchored Writing | 31. Manufactured Punchlines and Staccato Drama | 32. Aphorism Formulas | 33. Conversational Rhetorical Openers | 34. Shadowboxing (Answering Objections No One Raised) | 35. Rejecting Fake Alternatives | 36. Colons as Mid-Sentence Connectors
 
 ---
 
@@ -46,6 +46,14 @@ Full watchlists with before/after pairs. Read the entries you need; the index be
 **After:**
 > Alamata Raya Kobo is a town in the Gonder region of Ethiopia.
 
+The same reflex shows up in technical writing as feelings dressed as features. Name the mechanism, a number, or an instruction instead.
+**Before:**
+> The database stays close at hand, with SQL you can read and types that follow your schema.
+**After:**
+> `.toSQL()` returns the exact string sent to the database, and renaming a column fails the build.
+
+Test: if a sentence could appear unchanged in another project's documentation, it says nothing about this one. Cut it or replace it with something only true here.
+
 ### 5. Vague Attributions and Weasel Words
 
 **Words to watch:** Industry reports, Observers have cited, Experts argue, Some critics argue, several sources/publications (when few cited)
@@ -73,6 +81,8 @@ Full watchlists with before/after pairs. Read the entries you need; the index be
 ### 7. Overused "AI Vocabulary" Words
 
 **High-frequency AI words:** Actually, additionally, align with, crucial, delve, emphasizing, enduring, enhance, fostering, garner, gate/gated/gating (figurative; preserve established technical usage), highlight (verb), interplay, intricate/intricacies, key (adjective), landscape (abstract noun), pivotal, quietly, showcase, tapestry (abstract noun), testament, underscore (verb), valuable, vibrant
+**Technical-sounding abstractions:** substrate, wedge, vector, locus, vantage, nexus, primitive (noun), harness (metaphor), surface (as in "API surface"), bedrock, scaffolding (metaphor), modality, paradigm, flywheel, north star, endgame, ratchet (metaphor), evacuate (for moving code). These read as precise and usually are not: substrate is a base, a wedge is an addition, a vector is a way. Preserve established technical usage; the tell is the metaphor, not the word.
+**Fancier synonyms with a plain equivalent:** utilize → use, leverage → use, facilitate → help, numerous → many, in the event that → if.
 **Problem:** These words appear far more frequently in post-2023 text. They often co-occur.
 **Before:**
 > Additionally, a distinctive feature of Somali cuisine is the incorporation of camel meat. An enduring testament to Italian colonial influence is the widespread adoption of pasta in the local culinary landscape, showcasing how these dishes have integrated into the traditional diet.
@@ -147,7 +157,7 @@ Do not ban the repeated word. Fix the repeated sentence pattern; the surviving s
 **After:**
 > The new policy, announced without warning, affects thousands of workers. The changes, long overdue according to critics, will take effect immediately.
 
-Before returning the final rewrite, scan it for `—` and `–`. Any hit means the draft isn't done. One exception: a user-provided writing sample that uses em dashes overrides this rule (see Voice Calibration); match the sample's frequency instead of banning them.
+Before returning the final rewrite, scan it for `—` and `–`. Any hit means the draft isn't done. Watch the replacement too: a rewrite where every former dash became parentheses has traded one tic for another, so vary the fix and restructure when a sentence needs it. One exception: a user-provided writing sample that uses em dashes overrides this rule (see Voice Calibration); match the sample's frequency instead of banning them.
 
 ### 15. Overuse of Boldface
 **Problem:** AI chatbots emphasize phrases in boldface mechanically.
@@ -164,6 +174,8 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 > - **Security:** Security has been strengthened with end-to-end encryption.
 **After:**
 > The update improves the interface, speeds up load times through optimized algorithms, and adds end-to-end encryption.
+
+The tell is the label that restates the line after it. A bold lead-in ending in a period, naming the item, followed by genuinely new detail is fine: "**Schema in TypeScript.** Tables live in one file." Leave those alone.
 
 ### 17. Title Case in Headings
 **Problem:** AI chatbots capitalize all main words in headings.
@@ -346,3 +358,13 @@ Cut only the unsupported defense. If it carries a real claim, state that claim d
 > Session tokens are rotated every 24 hours, in place, and clients refresh transparently.
 
 One rejected option can be legitimate. Several short unrelated rejections are the stronger signal. Ask what each sentence adds; if it only records an earlier edit, rewrite the paragraph around its point.
+
+### 36. Colons as Mid-Sentence Connectors
+
+**Problem:** LLMs join two clauses with a colon where the sentence needs no join at all. A colon before a list or an example is ordinary punctuation and not a tell. The tell is the colon used as a hinge between a setup and a payoff, often carrying comparison framing the reader never asked for.
+**Before:**
+> If you're coming from traditional automation: instead of registering event handlers, you describe conditions.
+**After:**
+> Describing when the scheduler should fire works best as plain English.
+
+Do not flag colons introducing lists, examples, quotations, or definitions. If several hinge colons appear in one passage, treat them the way you treat em dashes: the writer is reaching for the same crutch repeatedly.

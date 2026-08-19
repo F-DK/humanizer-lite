@@ -102,7 +102,7 @@ The skill will analyze your sentence rhythm, word choices, and quirks, then appl
 
 Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
 
-`SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 33 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
+`SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 35 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
 
 The skill also runs a self-audit before delivering, to catch lingering AI-isms and any fact the rewrite invented.
 
@@ -112,7 +112,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 
 > "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
 
-## 33 Patterns Detected (with Before/After Examples)
+## 35 Patterns Detected (with Before/After Examples)
 
 ### Content Patterns
 
@@ -133,7 +133,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 8 | **Copula avoidance** | "serves as... features... boasts" | "is... has" |
 | 9 | **Negative parallelisms / tailing negations** | "It's not just X, it's Y", "..., no guessing" | State the point directly |
 | 10 | **Rule of three** | "innovation, inspiration, and insights" | Use natural number of items |
-| 11 | **Synonym cycling** | "protagonist... main character... central figure... hero" | "protagonist" (repeat when clearest) |
+| 11 | **Synonym cycling / repeated openings** | "protagonist... main character... central figure... hero" | "protagonist" (repeat when clearest) |
 | 12 | **False ranges** | "from the Big Bang to dark matter" | List topics directly |
 | 13 | **Passive voice / subjectless fragments** | "No configuration file needed" | Name the actor when it helps clarity |
 
@@ -155,6 +155,8 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 31 | **Manufactured punchlines / staccato drama** | "It had no preference. No prior. No nostalgia." | Use varied sentence lengths and concrete claims |
 | 32 | **Aphorism formulas** | "Symmetry is the language of trust" | Replace the formula with the actual claim |
 | 33 | **Conversational rhetorical openers** | "Honestly? It depends..." | Remove the fake-candid setup |
+| 34 | **Shadowboxing** | "I'm not saying documentation doesn't matter..." | Cut the defense; state the real claim |
+| 35 | **Rejecting fake alternatives** | "A tempting approach would be... but" | Cut the option nobody would pick |
 
 ### Communication Patterns
 
@@ -209,6 +211,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 
 ## Version History
 
+- **4.1.0** - Synced with upstream v2.11.2: added patterns #34 (shadowboxing, defending against objections the text never raised) and #35 (rejecting fake alternatives, editorial scar tissue left in the final draft), extended #11 to repeated sentence openings, broadened #28 to casual announcements, added `quietly` and figurative `gate/gated/gating` to the #7 vocabulary list, and added the matching false-positive guards for real disclaimers, real alternatives, and deliberate repetition. Packaging: `plugin.json` now declares `"skills": ["./"]` so Claude Desktop discovers the plugin, and the validator reads files as UTF-8 so it works on Windows locales. 35 patterns total.
 - **4.0.0** - Split the skill into a short `SKILL.md` and two on-demand references (`references/patterns.md`, `references/false-positives.md`), cutting what a session loads up front by roughly 80% while keeping the full catalogue available. The prompt now states the three non-derivable rules (no fabrication, sterility is also a tell, no em/en dashes) and leaves the rest to judgement, with the pattern lists framed as evidence rather than a banlist. No change to the 33 patterns.
 - **2.9.1** - Improved distribution and portability: removed nonportable frontmatter and tool preapprovals, made global installation the documented default, added package validation, and removed the duplicated long-form example from the runtime prompt. No change to the 33 patterns.
 - **2.9.0** - Added a no-fabrication rule: rewrites may not invent facts, names, dates, or citations not present in the source, and every example that modeled invented specifics was re-cut to use only source information (fixes #187). Replaced paragraph-count parity with an information-over-shape rule, made a user's voice sample outrank the em dash ban, and added invocation modes (pasted text / file / embedded). No change to the 33 patterns.

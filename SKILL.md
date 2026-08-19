@@ -8,7 +8,7 @@ description: |
   overuse, rule of three, AI vocabulary, negative parallelism, hedging, and filler.
 license: MIT
 metadata:
-  version: "4.0.0"
+  version: "4.1.0"
 ---
 
 # Humanizer
@@ -43,7 +43,7 @@ Without a sample, match the register the text is already in.
 
 ## References
 
-- `references/patterns.md`: the 33 patterns with watchlists and before/after pairs. Consult the entries relevant to the text in front of you. Worth a full pass when the text is long, heavily AI-flavored, or when you want to name what you changed.
+- `references/patterns.md`: the 35 patterns with watchlists and before/after pairs. Consult the entries relevant to the text in front of you. Worth a full pass when the text is long, heavily AI-flavored, or when you want to name what you changed.
 - `references/false-positives.md`: what looks like AI but is not, and the signals of genuine human writing that over-editing destroys. Read this before editing anything that might already be human-written.
 
 ## Output

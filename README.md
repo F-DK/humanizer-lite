@@ -1,7 +1,5 @@
 # Humanizer Lite
 
-[![skills.sh installs](https://skills.sh/b/f-dk/humanizer-lite)](https://skills.sh/f-dk/humanizer-lite)
-
 A portable agent skill that removes signs of AI-generated writing from text. It is plain Markdown, so it runs in any harness that supports skill-style instructions.
 
 This is a fork of [blader/humanizer](https://github.com/blader/humanizer) that splits the skill in two: a short `SKILL.md` the agent always loads, and a `references/` folder it opens only when the text calls for it. Same 35 patterns, same Wikipedia source, a much smaller prompt per invocation.

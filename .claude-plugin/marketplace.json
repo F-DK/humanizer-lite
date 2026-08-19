@@ -1,11 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
-  "name": "humanizer",
+  "name": "humanizer-lite",
   "owner": {
-    "name": "blader",
-    "url": "https://github.com/blader"
+    "name": "F-DK",
+    "url": "https://github.com/F-DK"
   },
-  "description": "The humanizer skill, installable as a Claude Code plugin.",
+  "description": "The humanizer-lite skill, installable as a Claude Code plugin.",
   "plugins": [
     {
       "name": "humanizer",

@@ -1,8 +1,12 @@
-# Humanizer
+# Humanizer Lite
 
-[![skills.sh installs](https://skills.sh/b/blader/humanizer)](https://skills.sh/blader/humanizer)
+[![skills.sh installs](https://skills.sh/b/f-dk/humanizer-lite)](https://skills.sh/f-dk/humanizer-lite)
 
-A portable agent skill that removes signs of AI-generated writing from text, making it sound more natural and human. It is plain Markdown, so it can run in any harness that supports skill-style instructions.
+A portable agent skill that removes signs of AI-generated writing from text. It is plain Markdown, so it runs in any harness that supports skill-style instructions.
+
+This is a fork of [blader/humanizer](https://github.com/blader/humanizer) that splits the skill in two: a short `SKILL.md` the agent always loads, and a `references/` folder it opens only when the text calls for it. Same 35 patterns, same Wikipedia source, a much smaller prompt per invocation.
+
+It installs under the skill name `humanizer`, the same name upstream uses. Remove any existing humanizer install first, or you will have two copies competing.
 
 ## Installation
 
@@ -11,7 +15,7 @@ A portable agent skill that removes signs of AI-generated writing from text, mak
 Install globally with the cross-agent skills CLI so Humanizer is available in every project:
 
 ```bash
-npx skills add blader/humanizer --global
+npx skills add f-dk/humanizer-lite --global
 ```
 
 Update an existing install:
@@ -23,13 +27,13 @@ npx skills update humanizer --global
 To install globally into every supported agent harness:
 
 ```bash
-npx skills add blader/humanizer --global --agent '*'
+npx skills add f-dk/humanizer-lite --global --agent '*'
 ```
 
 To target one configured harness, pass its agent name:
 
 ```bash
-npx skills add blader/humanizer --global --agent <agent-name>
+npx skills add f-dk/humanizer-lite --global --agent <agent-name>
 ```
 
 Omit `--global` for a project-local install that can be committed and shared with collaborators. Start a new agent session or reload skills after installation.
@@ -39,8 +43,8 @@ Omit `--global` for a project-local install that can be committed and shared wit
 Claude Code users can also install Humanizer as a plugin:
 
 ```
-/plugin marketplace add blader/humanizer
-/plugin install humanizer@humanizer
+/plugin marketplace add F-DK/humanizer-lite
+/plugin install humanizer@humanizer-lite
 ```
 
 The skill is then invoked as `/humanizer:humanizer`.
@@ -64,7 +68,7 @@ Any agent harness can use the skill directly because the runtime artifacts are p
 For example:
 
 ```bash
-git clone https://github.com/blader/humanizer.git /path/to/your/skills/humanizer
+git clone https://github.com/F-DK/humanizer-lite.git /path/to/your/skills/humanizer
 ```
 
 Or, if you already have this repo cloned:
@@ -94,7 +98,7 @@ Point it at a file and the skill rewrites it in place:
 Humanize the prose in docs/launch-post.md
 ```
 
-### Voice Calibration
+### Voice calibration
 
 To match your personal writing style, provide a sample of your own writing:
 
@@ -112,7 +116,7 @@ The skill will analyze your sentence rhythm, word choices, and quirks, then appl
 
 ## Overview
 
-Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
+Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), maintained by WikiProject AI Cleanup. The guide is compiled from cleanup work on AI-generated text across Wikipedia.
 
 `SKILL.md` stays short so it costs little to keep loaded: it carries the rules the agent cannot derive on its own, then pulls in `references/patterns.md` (the 35 patterns with watchlists and before/after pairs) and `references/false-positives.md` (what looks like AI but is not) only when the text in front of it needs them.
 
@@ -120,13 +124,15 @@ The skill also runs a self-audit before delivering, to catch lingering AI-isms a
 
 Rewrites follow a no-fabrication rule: they never add facts, names, dates, or citations that aren't in the source text. Specificity has to come from the source or the author, not from the rewrite.
 
-### Key Insight from Wikipedia
+### Key insight from Wikipedia
 
 > "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
 
-## 35 Patterns Detected (with Before/After Examples)
+## The 35 patterns
 
-### Content Patterns
+Grouped as in [`references/patterns.md`](references/patterns.md), where each entry has its full watchlist.
+
+### Content patterns
 
 | # | Pattern | Before | After |
 |---|---------|--------|-------|
@@ -137,7 +143,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 5 | **Vague attributions** | "Experts believe it plays a crucial role" | Name a real source or cut the claim |
 | 6 | **Formulaic challenges** | "Despite challenges... continues to thrive" | Keep the sourced facts; cut the boosterism |
 
-### Language Patterns
+### Language and grammar patterns
 
 | # | Pattern | Before | After |
 |---|---------|--------|-------|
@@ -149,7 +155,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 12 | **False ranges** | "from the Big Bang to dark matter" | List topics directly |
 | 13 | **Passive voice / subjectless fragments** | "No configuration file needed" | Name the actor when it helps clarity |
 
-### Style Patterns
+### Style patterns
 
 | # | Pattern | Before | After |
 |---|---------|--------|-------|
@@ -159,7 +165,28 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 17 | **Title Case Headings** | "Strategic Negotiations And Partnerships" | "Strategic negotiations and partnerships" |
 | 18 | **Emojis** | "🚀 Launch Phase: 💡 Key Insight:" | Remove emojis |
 | 19 | **Curly quotes** | `said “the project”` | `said "the project"` |
-| 26 | **Hyphenated word pairs** | “cross-functional, data-driven, client-facing” | Drop hyphens on common word pairs |
+
+### Communication patterns
+
+| # | Pattern | Before | After |
+|---|---------|--------|-------|
+| 20 | **Chatbot artifacts** | "I hope this helps! Let me know if..." | Remove entirely |
+| 21 | **Cutoff disclaimers** | "While details are limited in available sources..." | Find sources or remove |
+| 22 | **Sycophantic tone** | "Great question! You're absolutely right!" | Respond directly |
+
+### Filler and hedging
+
+| # | Pattern | Before | After |
+|---|---------|--------|-------|
+| 23 | **Filler phrases** | "In order to", "Due to the fact that" | "To", "Because" |
+| 24 | **Excessive hedging** | "could potentially possibly" | "may" |
+| 25 | **Generic conclusions** | "The future looks bright" | Specific plans or facts |
+| 26 | **Hyphenated word pairs** | "cross-functional, data-driven, client-facing" | Drop hyphens on common word pairs |
+
+### Rhetoric and cadence
+
+| # | Pattern | Before | After |
+|---|---------|--------|-------|
 | 27 | **Persuasive authority tropes** | "At its core, what matters is..." | State the point directly |
 | 28 | **Signposting announcements** | "Let's dive in", "Here's what you need to know" | Start with the content |
 | 29 | **Fragmented headers** | "## Performance" + "Speed matters." | Let the heading do the work |
@@ -170,23 +197,7 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 | 34 | **Shadowboxing** | "I'm not saying documentation doesn't matter..." | Cut the defense; state the real claim |
 | 35 | **Rejecting fake alternatives** | "A tempting approach would be... but" | Cut the option nobody would pick |
 
-### Communication Patterns
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 20 | **Chatbot artifacts** | "I hope this helps! Let me know if..." | Remove entirely |
-| 21 | **Cutoff disclaimers** | "While details are limited in available sources..." | Find sources or remove |
-| 22 | **Sycophantic tone** | "Great question! You're absolutely right!" | Respond directly |
-
-### Filler and Hedging
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 23 | **Filler phrases** | "In order to", "Due to the fact that" | "To", "Because" |
-| 24 | **Excessive hedging** | "could potentially possibly" | "may" |
-| 25 | **Generic conclusions** | "The future looks bright" | Specific plans or facts |
-
-## Full Example
+## Full example
 
 *(Illustration note: the rewrite below adds specifics, like the month and the neighborhoods, that stand in for details the author would supply. In a real session those come from the user; the skill asks rather than invents.)*
 
@@ -221,10 +232,13 @@ Rewrites follow a no-fabrication rule: they never add facts, names, dates, or ci
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - Primary source
 - [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) - Maintaining organization
 
-## Version History
+## Version history
 
 - **4.1.0** - Synced with upstream v2.11.2: added patterns #34 (shadowboxing, defending against objections the text never raised) and #35 (rejecting fake alternatives, editorial scar tissue left in the final draft), extended #11 to repeated sentence openings, broadened #28 to casual announcements, added `quietly` and figurative `gate/gated/gating` to the #7 vocabulary list, and added the matching false-positive guards for real disclaimers, real alternatives, and deliberate repetition. Packaging: `plugin.json` now declares `"skills": ["./"]` so Claude Desktop discovers the plugin, and the validator reads files as UTF-8 so it works on Windows locales. 35 patterns total.
-- **4.0.0** - Split the skill into a short `SKILL.md` and two on-demand references (`references/patterns.md`, `references/false-positives.md`), cutting what a session loads up front by roughly 80% while keeping the full catalogue available. The prompt now states the three non-derivable rules (no fabrication, sterility is also a tell, no em/en dashes) and leaves the rest to judgement, with the pattern lists framed as evidence rather than a banlist. No change to the 33 patterns.
+- **4.0.0** - Split the skill into a short `SKILL.md` and two on-demand references (`references/patterns.md`, `references/false-positives.md`), cutting the prompt an invocation loads from 412 lines (29.6 KB) to 57 lines (4.4 KB) while keeping the full catalogue available on demand. The prompt now states the three non-derivable rules (no fabrication, sterility is also a tell, no em/en dashes) and leaves the rest to judgement, with the pattern lists framed as evidence rather than a banlist. Forked from upstream 2.9.1; no change to the 33 patterns.
+
+Entries below are inherited from upstream [blader/humanizer](https://github.com/blader/humanizer); this fork branched at 2.9.1.
+
 - **2.9.1** - Improved distribution and portability: removed nonportable frontmatter and tool preapprovals, made global installation the documented default, added package validation, and removed the duplicated long-form example from the runtime prompt. No change to the 33 patterns.
 - **2.9.0** - Added a no-fabrication rule: rewrites may not invent facts, names, dates, or citations not present in the source, and every example that modeled invented specifics was re-cut to use only source information (fixes #187). Replaced paragraph-count parity with an information-over-shape rule, made a user's voice sample outrank the em dash ban, and added invocation modes (pasted text / file / embedded). No change to the 33 patterns.
 - **2.8.3** - Moved the skill version from the unsupported top-level frontmatter key to `metadata.version` for Agent Skills and Claude compatibility. No change to the 33 patterns.

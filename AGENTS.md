@@ -13,14 +13,14 @@ A portable agent skill implemented entirely as Markdown. The runtime artifacts a
 - `references/false-positives.md` — what looks like AI but is not, and the human signals over-editing destroys.
 - `README.md` — for humans: installation, usage, a summary table of the patterns, and a version history.
 - `.claude-plugin/plugin.json` — optional Claude Code plugin manifest.
-- `.claude-plugin/marketplace.json` — optional single-repo marketplace entry so `/plugin marketplace add blader/humanizer` works.
+- `.claude-plugin/marketplace.json` — optional single-repo marketplace entry so `/plugin marketplace add F-DK/humanizer-lite` works.
 - `scripts/validate-package.py` — dependency-free package and synchronization checks used locally and in CI.
 
 ## The maintenance contract
 
 `SKILL.md`, `references/`, and `README.md` must stay in sync. When you change behavior or content:
 
-- **Patterns:** the skill currently defines **35 numbered patterns**, in `references/patterns.md`. If you add, remove, or renumber any, update the README pattern table, its "N Patterns Detected" heading, and every cross-reference in the same change. Keep numbering stable unless you are deliberately renumbering.
+- **Patterns:** the skill currently defines **35 numbered patterns**, in `references/patterns.md`. If you add, remove, or renumber any, update the README pattern table, its pattern-count heading, and every cross-reference in the same change. Keep numbering stable unless you are deliberately renumbering.
 - **Version:** `SKILL.md` frontmatter stores the version under `metadata.version`, `README.md` has a "Version History" section, and `.claude-plugin/plugin.json` has a `version` field. Bump them together so package metadata matches the skill. Keep the skill version under `metadata`; a top-level `version` key is not portable across Agent Skills hosts. (`marketplace.json` intentionally omits a version so `plugin.json` stays the package source of truth.)
 - **Compatibility:** keep install and usage language harness-neutral. The skill should work in any agent harness that can load Markdown skill instructions; Claude Code, OpenCode, Codex, and other harnesses are examples, not limits.
 - **Validation:** run `python3 scripts/validate-package.py`, `npx skills add . --list`, and `claude plugin validate .` before publishing.

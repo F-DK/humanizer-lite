@@ -4,11 +4,11 @@
   "description": "Remove signs of AI-generated writing from text, making it sound more natural and human. Based on Wikipedia's \"Signs of AI writing\" guide.",
   "version": "4.1.0",
   "author": {
-    "name": "blader",
-    "url": "https://github.com/blader"
+    "name": "F-DK",
+    "url": "https://github.com/F-DK"
   },
-  "homepage": "https://github.com/blader/humanizer",
-  "repository": "https://github.com/blader/humanizer",
+  "homepage": "https://github.com/F-DK/humanizer-lite",
+  "repository": "https://github.com/F-DK/humanizer-lite",
   "license": "MIT",
   "keywords": ["writing", "editing", "ai-detection", "humanize", "prose", "style"],
   "skills": ["./"]

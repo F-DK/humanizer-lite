@@ -254,6 +254,8 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 **After:**
 > The cross-functional team delivered a high-quality, data-driven report. The team is cross functional, the report is high quality, and the methodology is data driven.
 
+## RHETORIC AND CADENCE
+
 ### 27. Persuasive Authority Tropes
 
 **Phrases to watch:** The real question is, at its core, in reality, what really matters, fundamentally, the deeper issue, the heart of the matter

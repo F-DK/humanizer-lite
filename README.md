@@ -45,6 +45,18 @@ Claude Code users can also install Humanizer as a plugin:
 
 The skill is then invoked as `/humanizer:humanizer`.
 
+### Claude Cowork (and Claude apps)
+
+Cowork loads a skill from a ZIP whose root is the skill folder. Build one:
+
+```bash
+mkdir -p dist/humanizer-lite && cp -R SKILL.md references dist/humanizer-lite/
+sed -i '' 's/^name: humanizer$/name: humanizer-lite/' dist/humanizer-lite/SKILL.md
+(cd dist && zip -qr humanizer-lite.zip humanizer-lite) && rm -rf dist/humanizer-lite
+```
+
+Then upload `dist/humanizer-lite.zip` in Claude under **Customize > Skills > Add**. The rename keeps it distinct from an installed upstream `humanizer`; drop the `sed` line if you don't have one. On Linux use `sed -i` without the `''`.
+
 ### Manual
 
 Any agent harness can use the skill directly because the runtime artifacts are plain Markdown: `SKILL.md` plus the `references/` folder it loads on demand. Install them wherever your harness expects skill directories.

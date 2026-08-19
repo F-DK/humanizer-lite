@@ -13,7 +13,10 @@ A clean human writer can hit several of the patterns above without any AI involv
 - **Curly quotes alone.** macOS, Word, Google Docs, and most CMSes auto-curl by default. Curly quotes only count when stacked with other tells.
 - **Em dashes alone.** Many editors and journalists use them often. Em dashes are evidence only when paired with formulaic sales-y rhythm.
 - **One short emphatic sentence.** Humans use clipped sentences to land a point. Flag staccato drama only when several short fragments appear in a row and inflate the tone.
+- **Deliberate repeated openings.** Writers repeat an opening to build rhythm or pressure: "She came. She saw. She conquered." Change it only when the repetition adds nothing.
 - **"Honestly" or "look" mid-sentence.** These are ordinary in casual writing. The tell is the standalone theatrical opener, not the word itself.
+- **Useful limits and disclaimers.** Keep scope statements, legal and safety notices, real corrections, named objections and their replies, and FAQ answers. §34 is about defenses with no source, not about every caveat.
+- **Real alternatives.** Keep options a reader would actually weigh in a design document, tutorial, or argument. §35 targets the unlikely option the text dismisses and never uses again.
 - **Unsourced claims.** Most of the web is unsourced. Lack of citations doesn't prove anything.
 - **Correct, complex formatting.** Visual editors and templates produce clean output without any AI.
 - **Secondhand text.** Do not rewrite watched phrases inside quotations, titles, proper names, or examples where the phrase is being discussed rather than used.

@@ -2,7 +2,7 @@
 
 Full watchlists with before/after pairs. Read the entries you need; the index below is the map.
 
-1. Undue Emphasis on Significance, Legacy, and Broader Trends | 2. Undue Emphasis on Notability and Media Coverage | 3. Superficial Analyses with -ing Endings | 4. Promotional and Advertisement-like Language | 5. Vague Attributions and Weasel Words | 6. Outline-like "Challenges and Future Prospects" Sections | 7. Overused "AI Vocabulary" Words | 8. Avoidance of "is"/"are" (Copula Avoidance) | 9. Negative Parallelisms and Tailing Negations | 10. Rule of Three Overuse | 11. Elegant Variation (Synonym Cycling) | 12. False Ranges | 13. Passive Voice and Subjectless Fragments | 14. Em Dashes (and En Dashes): Cut Them | 15. Overuse of Boldface | 16. Inline-Header Vertical Lists | 17. Title Case in Headings | 18. Emojis | 19. Curly Quotation Marks | 20. Collaborative Communication Artifacts | 21. Knowledge-Cutoff Disclaimers and Speculative Gap-Filling | 22. Sycophantic/Servile Tone | 23. Filler Phrases | 24. Excessive Hedging | 25. Generic Positive Conclusions | 26. Hyphenated Word Pair Overuse | 27. Persuasive Authority Tropes | 28. Signposting and Announcements | 29. Fragmented Headers | 30. Diff-Anchored Writing | 31. Manufactured Punchlines and Staccato Drama | 32. Aphorism Formulas | 33. Conversational Rhetorical Openers
+1. Undue Emphasis on Significance, Legacy, and Broader Trends | 2. Undue Emphasis on Notability and Media Coverage | 3. Superficial Analyses with -ing Endings | 4. Promotional and Advertisement-like Language | 5. Vague Attributions and Weasel Words | 6. Outline-like "Challenges and Future Prospects" Sections | 7. Overused "AI Vocabulary" Words | 8. Avoidance of "is"/"are" (Copula Avoidance) | 9. Negative Parallelisms and Tailing Negations | 10. Rule of Three Overuse | 11. Elegant Variation and Repeated Sentence Openings | 12. False Ranges | 13. Passive Voice and Subjectless Fragments | 14. Em Dashes (and En Dashes): Cut Them | 15. Overuse of Boldface | 16. Inline-Header Vertical Lists | 17. Title Case in Headings | 18. Emojis | 19. Curly Quotation Marks | 20. Collaborative Communication Artifacts | 21. Knowledge-Cutoff Disclaimers and Speculative Gap-Filling | 22. Sycophantic/Servile Tone | 23. Filler Phrases | 24. Excessive Hedging | 25. Generic Positive Conclusions | 26. Hyphenated Word Pair Overuse | 27. Persuasive Authority Tropes | 28. Signposting and Announcements | 29. Fragmented Headers | 30. Diff-Anchored Writing | 31. Manufactured Punchlines and Staccato Drama | 32. Aphorism Formulas | 33. Conversational Rhetorical Openers | 34. Shadowboxing (Answering Objections No One Raised) | 35. Rejecting Fake Alternatives
 
 ---
 
@@ -72,7 +72,7 @@ Full watchlists with before/after pairs. Read the entries you need; the index be
 
 ### 7. Overused "AI Vocabulary" Words
 
-**High-frequency AI words:** Actually, additionally, align with, crucial, delve, emphasizing, enduring, enhance, fostering, garner, highlight (verb), interplay, intricate/intricacies, key (adjective), landscape (abstract noun), pivotal, showcase, tapestry (abstract noun), testament, underscore (verb), valuable, vibrant
+**High-frequency AI words:** Actually, additionally, align with, crucial, delve, emphasizing, enduring, enhance, fostering, garner, gate/gated/gating (figurative; preserve established technical usage), highlight (verb), interplay, intricate/intricacies, key (adjective), landscape (abstract noun), pivotal, quietly, showcase, tapestry (abstract noun), testament, underscore (verb), valuable, vibrant
 **Problem:** These words appear far more frequently in post-2023 text. They often co-occur.
 **Before:**
 > Additionally, a distinctive feature of Somali cuisine is the incorporation of camel meat. An enduring testament to Italian colonial influence is the widespread adoption of pasta in the local culinary landscape, showcasing how these dishes have integrated into the traditional diet.
@@ -106,12 +106,18 @@ Full watchlists with before/after pairs. Read the entries you need; the index be
 **After:**
 > The event includes talks and panels. There's also time for informal networking between sessions.
 
-### 11. Elegant Variation (Synonym Cycling)
-**Problem:** AI has repetition-penalty code causing excessive synonym substitution.
-**Before:**
+### 11. Elegant Variation (Synonym Cycling) and Repeated Sentence Openings
+**Problem:** AI has repetition-penalty code causing excessive synonym substitution. The same machinery fails in the other direction: several sentences in a row opening on the same subject, often *she* or *he*. Use one clear name for one referent. For repeated openings, merge sentences, switch the subject where that helps, or lead with the action.
+**Before (synonym cycling):**
 > The protagonist faces many challenges. The main character must overcome obstacles. The central figure eventually triumphs. The hero returns home.
 **After:**
 > The protagonist faces many challenges but eventually triumphs and returns home.
+**Before (repeated openings):**
+> She noted the door. She noted the lock on it. She filed both away.
+**After:**
+> She noted the door and its lock, then filed both away.
+
+Do not ban the repeated word. Fix the repeated sentence pattern; the surviving sentence may still start with "She."
 
 ### 12. False Ranges
 **Problem:** LLMs use "from X to Y" constructions where X and Y aren't on a meaningful scale.
@@ -259,12 +265,16 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 
 ### 28. Signposting and Announcements
 
-**Phrases to watch:** Let's dive in, let's explore, let's break this down, here's what you need to know, now let's look at, without further ado
-**Problem:** LLMs announce what they are about to do instead of doing it. This meta-commentary slows the writing down and gives it a tutorial-script feel.
+**Phrases to watch:** Let's dive in, let's explore, let's break this down, here's what you need to know, now let's look at, without further ado, heads up, quick note, before I forget
+**Problem:** LLMs announce what they are about to do instead of doing it. This meta-commentary slows the writing down and gives it a tutorial-script feel. A casual phrase such as "one thing that bit me" does the same work; cut the announcement, not just its formal tone.
 **Before:**
 > Let's dive into how caching works in Next.js. Here's what you need to know.
 **After:**
 > Next.js caches data at multiple layers, including request memoization, the data cache, and the router cache.
+**Before (casual register):**
+> One thing that bit me hard, so pay attention to this part: the webpack dev server doesn't send the CORS header by default.
+**After:**
+> The webpack dev server doesn't send the CORS header by default.
 
 ### 29. Fragmented Headers
 
@@ -312,3 +322,25 @@ Before returning the final rewrite, scan it for `—` and `–`. Any hit means t
 > Is it worth the price? Honestly? It depends on how often you'll use it.
 **After:**
 > Whether it's worth the price depends on how often you'll use it.
+
+### 34. Shadowboxing (Answering Objections No One Raised)
+
+**Phrases to watch:** This isn't (mainly/really) about, I'm not saying/arguing/trying to, To be clear, Don't get me wrong, This is not to say, You could argue/frame this differently but, Some might say... but
+**Problem:** LLMs defend against an objection the text never raised. The tell is an unattributed statement about what the writer does not mean, especially when the rejected reading appears nowhere else. A direct claim such as "the API is not thread-safe" is not this pattern.
+**Before:**
+> This isn't mainly about prompt length, and I'm not arguing that documentation doesn't matter. You could categorize the problem another way, but the issue is whether the agent can use the instruction when it acts.
+**After:**
+> The issue is whether the agent can use the instruction when it acts.
+
+Cut only the unsupported defense. If it carries a real claim, state that claim directly. Keep an objection the text attributes to someone or answers in full.
+
+### 35. Rejecting Fake Alternatives
+
+**Phrases to watch:** A tempting option/approach would be, One might be tempted to, An obvious approach would be, You might think... but, It would be easy to just, Some would suggest
+**Problem:** LLMs raise an option no reader would consider, dismiss it in a clause, and never mention it again. It is usually editorial scar tissue: a drafting idea left in the final text. Cut the fake option and state the real constraint.
+**Before:**
+> Session tokens are rotated every 24 hours. A tempting approach would be to rotate them by restarting the auth service on a cron job, but that would drop every active session. Rotation happens in place, and clients refresh transparently.
+**After:**
+> Session tokens are rotated every 24 hours, in place, and clients refresh transparently.
+
+One rejected option can be legitimate. Several short unrelated rejections are the stronger signal. Ask what each sentence adds; if it only records an earlier edit, rewrite the paragraph around its point.
